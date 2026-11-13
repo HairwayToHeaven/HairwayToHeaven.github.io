@@ -751,6 +751,52 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   animation: sway 12s ease-in-out infinite alternate;
 }
 @keyframes sway { to { transform: rotate(-14deg) scale(1.06); } }
+.eco-intro {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center;
+  gap: clamp(40px, 6vw, 80px);
+  margin-bottom: clamp(44px, 6vw, 64px);
+}
+.eco-head { max-width: none; margin: 0; text-align: left; }
+.eco-photo {
+  position: relative; margin: 0;
+  width: 100%; max-width: 360px; justify-self: center;
+  aspect-ratio: 4 / 5;
+  transform: rotate(-2.5deg);
+  transition: transform .7s var(--spring);
+}
+.eco-photo::before {
+  content: ""; position: absolute; inset: -12px; z-index: 0;
+  border: 2px solid rgba(255, 217, 90, .5); border-radius: 38px;
+  transform: rotate(5deg);
+  transition: transform .7s var(--spring), border-color .4s;
+}
+.eco-photo-inner {
+  position: relative; z-index: 1; height: 100%;
+  overflow: hidden; border-radius: 28px;
+  box-shadow:
+    0 0 0 4px rgba(255, 217, 90, .9),
+    0 0 46px -4px rgba(255, 200, 40, .55),
+    0 30px 60px -24px rgba(0, 0, 0, .65);
+}
+.eco-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 30%;
+  transition: transform 1s cubic-bezier(.2, .8, .2, 1);
+}
+.eco-photo figcaption {
+  position: absolute; z-index: 2; left: -18px; bottom: 26px;
+  display: inline-flex; align-items: center; gap: .5em;
+  padding: .65em 1.1em; border-radius: 999px;
+  background: rgba(255, 255, 255, .94); color: var(--espresso);
+  font-weight: 800; font-size: .92rem;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .6);
+  animation: bob 6s ease-in-out infinite;
+}
+.eco-photo figcaption .ico { color: var(--sage); }
+.eco-photo:hover { transform: rotate(0deg) scale(1.02); }
+.eco-photo:hover::before { transform: rotate(0deg) scale(1.03); border-color: var(--gold-light); }
+.eco-photo:hover img { transform: scale(1.06); }
 .eco-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .eco-card {
   padding: 28px 24px;
@@ -910,6 +956,9 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   .steps::before { display: none; }
   .eco-grid { grid-template-columns: repeat(2, 1fr); }
   .events-grid { grid-template-columns: 1fr; }
+  .eco-intro { grid-template-columns: 1fr; }
+  .eco-head { text-align: center; }
+  .eco-photo { max-width: 300px; }
   .events-copy { text-align: center; }
   .event-tags { justify-content: center; }
   .events-panel { max-width: 560px; width: 100%; justify-self: center; }
